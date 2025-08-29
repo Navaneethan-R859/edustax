@@ -1,36 +1,102 @@
+"use client";
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
+    <footer className="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-900 text-gray-200 py-12">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-8">
+        {/* Brand Info */}
         <div>
-          <h3 className="text-white text-xl font-bold mb-4">Edustax</h3>
-          <p className="text-gray-400">Empowering education through technology.</p>
+          <h3 className="text-white text-2xl font-bold mb-4">Edustax</h3>
+          <p className="text-purple-200">Empowering education through technology.</p>
         </div>
+
+        {/* Product Links */}
         <div>
           <h4 className="text-white font-semibold mb-3">Product</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:text-white">Features</a></li>
-            <li><a href="#" className="hover:text-white">Pricing</a></li>
-            <li><a href="#" className="hover:text-white">Integrations</a></li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Features
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Pricing
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Integrations
+              </a>
+            </li>
           </ul>
         </div>
+
+        {/* Company Links */}
         <div>
           <h4 className="text-white font-semibold mb-3">Company</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:text-white">About</a></li>
-            <li><a href="#" className="hover:text-white">Careers</a></li>
-            <li><a href="#" className="hover:text-white">Contact</a></li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Careers
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
+
+        {/* Legal Links */}
         <div>
           <h4 className="text-white font-semibold mb-3">Legal</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white">Terms of Service</a></li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="hover:text-purple-300 transition-colors duration-300"
+              >
+                Terms of Service
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-      <div className="mt-10 text-center text-gray-500 text-sm">
+
+      <div className="mt-10 text-center text-purple-200 text-sm">
         © {new Date().getFullYear()} Edustax. All rights reserved.
       </div>
     </footer>
