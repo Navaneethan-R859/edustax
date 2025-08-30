@@ -14,7 +14,6 @@ import {
 import { UserCircle } from "lucide-react";
 
 export default function Features() {
-  // Card hover 3D effect
   const cardHover = {
     hover: {
       scale: 1.05,
@@ -24,7 +23,6 @@ export default function Features() {
     },
   };
 
-  // Floating icons
   const float = {
     animate: {
       y: [0, -15, 0],
@@ -32,7 +30,6 @@ export default function Features() {
     },
   };
 
-  // Fade-up animation for staggered entry
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: (i: number) => ({
@@ -43,14 +40,14 @@ export default function Features() {
   };
 
   const features = [
-    { icon: <FaBookOpen className="text-purple-600 text-5xl" />, title: "Wide Range of Courses", desc: "Access diverse subjects crafted by industry experts." },
-    { icon: <FaChalkboardTeacher className="text-green-600 text-5xl" />, title: "Expert Instructors", desc: "Learn from professionals with real-world experience." },
-    { icon: <FaLaptopCode className="text-blue-600 text-5xl" />, title: "Practical Learning", desc: "Hands-on projects and coding challenges." },
-    { icon: <FaCertificate className="text-yellow-600 text-5xl" />, title: "Certification", desc: "Earn globally recognized certificates." },
-    { icon: <FaUsers className="text-pink-600 text-5xl" />, title: "Community Support", desc: "Join learners worldwide and grow together." },
-    { icon: <FaGlobe className="text-indigo-600 text-5xl" />, title: "Global Access", desc: "Learn anytime, anywhere with multilingual support." },
-    { icon: <FaRocket className="text-red-600 text-5xl" />, title: "Career Boost", desc: "Get career-ready skills and land your dream job." },
-    { icon: <FaHeadset className="text-teal-600 text-5xl" />, title: "24/7 Support", desc: "Dedicated mentors and instant query resolution." },
+    { icon: <FaBookOpen className="text-purple-600 dark:text-purple-400 text-5xl" />, title: "Wide Range of Courses", desc: "Access diverse subjects crafted by industry experts." },
+    { icon: <FaChalkboardTeacher className="text-green-600 dark:text-green-400 text-5xl" />, title: "Expert Instructors", desc: "Learn from professionals with real-world experience." },
+    { icon: <FaLaptopCode className="text-blue-600 dark:text-blue-400 text-5xl" />, title: "Practical Learning", desc: "Hands-on projects and coding challenges." },
+    { icon: <FaCertificate className="text-yellow-600 dark:text-yellow-400 text-5xl" />, title: "Certification", desc: "Earn globally recognized certificates." },
+    { icon: <FaUsers className="text-pink-600 dark:text-pink-400 text-5xl" />, title: "Community Support", desc: "Join learners worldwide and grow together." },
+    { icon: <FaGlobe className="text-indigo-600 dark:text-indigo-400 text-5xl" />, title: "Global Access", desc: "Learn anytime, anywhere with multilingual support." },
+    { icon: <FaRocket className="text-red-600 dark:text-red-400 text-5xl" />, title: "Career Boost", desc: "Get career-ready skills and land your dream job." },
+    { icon: <FaHeadset className="text-teal-600 dark:text-teal-400 text-5xl" />, title: "24/7 Support", desc: "Dedicated mentors and instant query resolution." },
   ];
 
   const stats = [
@@ -61,7 +58,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
       {/* Section Heading */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -69,10 +66,10 @@ export default function Features() {
         transition={{ duration: 0.8 }}
         className="text-center mb-16 relative z-10"
       >
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
-          Features Of <span className="text-purple-600">EduStax</span>
+        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
+          Features Of <span className="text-purple-600 dark:text-purple-400">EduStax</span>
         </h2>
-        <p className="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+        <p className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
           Discover the features that make EduStax the best place for learning.
         </p>
       </motion.div>
@@ -82,7 +79,7 @@ export default function Features() {
         {features.map((feature, idx) => (
           <motion.div
             key={idx}
-            className="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
             variants={cardHover}
             whileHover="hover"
             whileTap={{ scale: 0.98 }}
@@ -95,10 +92,10 @@ export default function Features() {
             <motion.div variants={float} animate="animate" className="mb-6">
               {feature.icon}
             </motion.div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
               {feature.title}
             </h3>
-            <p className="text-gray-600">{feature.desc}</p>
+            <p className="text-gray-600 dark:text-gray-400">{feature.desc}</p>
           </motion.div>
         ))}
       </div>
@@ -111,11 +108,11 @@ export default function Features() {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, type: "spring", stiffness: 120 }}
           whileHover={{ scale: 1.02, rotateY: 5 }}
-          className="bg-white rounded-2xl shadow-xl p-6 col-span-1 flex flex-col space-y-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 col-span-1 flex flex-col space-y-6"
         >
-          <div className="font-bold text-xl">📚 EduStax</div>
-          <nav className="flex flex-col space-y-4 text-gray-700">
-            <a className="font-semibold text-purple-600">Dashboard</a>
+          <div className="font-bold text-xl text-gray-800 dark:text-white">📚 EduStax</div>
+          <nav className="flex flex-col space-y-4 text-gray-700 dark:text-gray-300">
+            <a className="font-semibold text-purple-600 dark:text-purple-400">Dashboard</a>
             <a>Learning</a>
             <a>My Organization</a>
             <a>Total Earnings</a>
@@ -124,7 +121,7 @@ export default function Features() {
           </nav>
           <motion.button
             whileHover={{ scale: 1.05 }}
-            className="mt-auto bg-gray-100 py-2 rounded-lg"
+            className="mt-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 rounded-lg"
           >
             Logout
           </motion.button>
@@ -136,7 +133,7 @@ export default function Features() {
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 1, type: "spring", stiffness: 100 }}
           whileHover={{ scale: 1.02, rotateY: 5, rotateX: 2 }}
-          className="bg-white rounded-2xl shadow-xl p-8 col-span-3"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 col-span-3"
         >
           {/* Navbar */}
           <motion.div
@@ -145,7 +142,7 @@ export default function Features() {
             transition={{ type: "spring", stiffness: 120, damping: 15, delay: 0.2 }}
             className="flex justify-between items-center mb-6"
           >
-            <h2 className="text-2xl font-bold">Dashboard</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h2>
             <div className="flex items-center gap-4">
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -153,7 +150,7 @@ export default function Features() {
               >
                 PLAN STATUS : PREMIUM
               </motion.button>
-              <UserCircle className="w-8 h-8 text-gray-600" />
+              <UserCircle className="w-8 h-8 text-gray-600 dark:text-gray-300" />
             </div>
           </motion.div>
 
@@ -163,10 +160,10 @@ export default function Features() {
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
           >
-            <h3 className="text-xl font-semibold">
-              Welcome back, <span className="text-purple-600">John!</span>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+              Welcome back, <span className="text-purple-600 dark:text-purple-400">John!</span>
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-6">
               Here’s a quick overview of your dashboard.
             </p>
           </motion.div>
@@ -180,12 +177,12 @@ export default function Features() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.2, type: "spring", stiffness: 120, damping: 12 }}
                 whileHover={{ scale: 1.12, rotateX: -8, rotateY: 8, boxShadow: "0px 15px 40px rgba(0,0,0,0.2)" }}
-                className="p-4 bg-gray-50 rounded-lg shadow-sm cursor-pointer"
+                className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm cursor-pointer"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <h4 className="text-sm text-gray-500">{stat.title}</h4>
-                <p className="text-2xl font-bold">{stat.value}</p>
-                <span className={`text-${stat.color}-600 text-sm`}>{stat.change}</span>
+                <h4 className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</h4>
+                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stat.value}</p>
+                <span className={`text-${stat.color}-600 dark:text-${stat.color}-400 text-sm`}>{stat.change}</span>
               </motion.div>
             ))}
           </div>
@@ -197,10 +194,10 @@ export default function Features() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring" }}
               whileHover={{ scale: 1.05, rotateZ: -2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 rounded-xl p-6 shadow-sm cursor-pointer"
+              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
             >
-              <h4 className="text-lg font-semibold mb-4">Upcoming Events</h4>
-              <div className="text-sm text-gray-500">📅 August 2025 (Calendar UI)</div>
+              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Upcoming Events</h4>
+              <div className="text-sm text-gray-500 dark:text-gray-400">📅 August 2025 (Calendar UI)</div>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
@@ -214,16 +211,16 @@ export default function Features() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", delay: 0.1 }}
               whileHover={{ scale: 1.05, rotateZ: 2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 rounded-xl p-6 shadow-sm cursor-pointer"
+              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
             >
-              <h4 className="text-lg font-semibold mb-4">Data Analytics Webinar</h4>
-              <p className="text-sm text-gray-600">
+              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Data Analytics Webinar</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 Tue, 12 Aug 2025 • 12:00–1:00 EST
               </p>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                 🎤 Hosted by Prof. Ramesh Kumar & Dr. Meena Joseph
               </p>
-              <p className="text-sm text-gray-500">👥 150+ registered</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">👥 150+ registered</p>
             </motion.div>
           </div>
         </motion.div>
@@ -231,12 +228,12 @@ export default function Features() {
 
       {/* Background Glow */}
       <motion.div
-        className="absolute top-40 left-20 w-80 h-80 bg-purple-400 rounded-full opacity-20 blur-3xl"
+        className="absolute top-40 left-20 w-80 h-80 bg-purple-400 dark:bg-purple-600 rounded-full opacity-20 blur-3xl"
         animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0], opacity: [0.2, 0.3, 0.2] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 rounded-full opacity-20 blur-3xl"
+        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 dark:bg-pink-600 rounded-full opacity-20 blur-3xl"
         animate={{ scale: [1.2, 1, 1.3], rotate: [0, -45, 0], opacity: [0.2, 0.35, 0.2] }}
         transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
       />

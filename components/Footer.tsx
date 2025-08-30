@@ -2,12 +2,14 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-purple-700 via-purple-800 to-indigo-900 text-gray-200 py-12">
+    <footer className="bg-gradient-to-br from-purple-900 via-indigo-950 to-black text-gray-200 py-12">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-8">
         {/* Brand Info */}
         <div>
           <h3 className="text-white text-2xl font-bold mb-4">Edustax</h3>
-          <p className="text-purple-200">Empowering education through technology.</p>
+          <p className="text-purple-200">
+            Empowering education through technology.
+          </p>
         </div>
 
         {/* Product Links */}
@@ -17,7 +19,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Features
               </a>
@@ -25,7 +27,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Pricing
               </a>
@@ -33,7 +35,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Integrations
               </a>
@@ -48,7 +50,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 About
               </a>
@@ -56,7 +58,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Careers
               </a>
@@ -64,7 +66,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Contact
               </a>
@@ -79,7 +81,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Privacy Policy
               </a>
@@ -87,7 +89,7 @@ export default function Footer() {
             <li>
               <a
                 href="#"
-                className="hover:text-purple-300 transition-colors duration-300"
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 Terms of Service
               </a>
@@ -96,7 +98,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-10 text-center text-purple-200 text-sm">
+      <div className="mt-10 text-center text-purple-300 text-sm">
         © {new Date().getFullYear()} Edustax. All rights reserved.
       </div>
     </footer>

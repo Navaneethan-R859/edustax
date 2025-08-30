@@ -35,7 +35,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="relative py-20 bg-gray-50 overflow-hidden">
+    <section className="relative py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Background Glows */}
       <motion.div
         className="absolute top-40 left-20 w-80 h-80 bg-purple-400 rounded-full opacity-20 blur-3xl"
@@ -54,7 +54,7 @@ export default function FAQ() {
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-black"
+          className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-black dark:text-white"
         >
           Frequently Asked Questions
         </motion.h2>
@@ -63,7 +63,7 @@ export default function FAQ() {
           {faqs.map((faq, idx) => (
             <motion.div
               key={idx}
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden cursor-pointer border-2 border-purple-200"
+              className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden cursor-pointer border-2 border-purple-200 dark:border-purple-700"
               variants={fadeUp}
               custom={idx}
               initial="hidden"
@@ -74,7 +74,7 @@ export default function FAQ() {
             >
               {/* Question */}
               <button
-                className="w-full flex justify-between items-center p-6 text-left text-purple-700 font-semibold text-lg"
+                className="w-full flex justify-between items-center p-6 text-left text-purple-700 dark:text-purple-300 font-semibold text-lg"
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               >
                 {faq.question}
@@ -93,7 +93,7 @@ export default function FAQ() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="px-6 pb-6 text-gray-600"
+                    className="px-6 pb-6 text-gray-600 dark:text-gray-300"
                   >
                     {faq.answer}
                   </motion.div>

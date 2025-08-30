@@ -52,19 +52,22 @@ export default function Pricing() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-50 via-white to-purple-100">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <section className="relative py-20 bg-white dark:bg-gradient-to-r dark:from-purple-700 dark:via-purple-800 dark:to-indigo-900 overflow-hidden">
+      {/* Gradient blobs for glow (only show in light mode for subtle effect) */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse dark:hidden"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse dark:hidden"></div>
+
+      <div className="relative max-w-7xl mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
-  initial={{ opacity: 0, y: -30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  className="text-4xl md:text-5xl font-extrabold mb-16 text-center"
->
-  <span className="text-gray-800">EduStax</span>{" "}
-  <span className="text-purple-700">Pricing Plans</span>
-</motion.h2>
-
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-extrabold mb-16 text-center text-gray-800 dark:text-white"
+        >
+          <span className="text-gray-800 dark:text-white">EduStax</span>{" "}
+          <span className="text-purple-700 dark:text-purple-300">Pricing Plans</span>
+        </motion.h2>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-10">
@@ -75,7 +78,7 @@ export default function Pricing() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: idx * 0.2, type: "spring", stiffness: 120 }}
               whileHover={cardHover}
-              className="relative p-8 bg-white rounded-3xl flex flex-col items-center text-center cursor-pointer overflow-hidden"
+              className="relative p-8 bg-white dark:bg-gray-900 rounded-3xl flex flex-col items-center text-center cursor-pointer overflow-hidden shadow-lg"
             >
               {/* Animated Border */}
               <motion.div
@@ -84,10 +87,14 @@ export default function Pricing() {
               />
 
               {/* Plan Name */}
-              <h3 className="text-2xl font-semibold mb-4 text-purple-700">{plan.name}</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-purple-700 dark:text-purple-300">
+                {plan.name}
+              </h3>
 
               {/* Price */}
-              <p className="text-4xl font-extrabold mb-6 text-indigo-600">{plan.price}</p>
+              <p className="text-4xl font-extrabold mb-6 text-indigo-600 dark:text-indigo-300">
+                {plan.price}
+              </p>
 
               {/* Features */}
               <ul className="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
@@ -99,7 +106,7 @@ export default function Pricing() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                   >
-                    <Check className="h-5 w-5 text-purple-600" />
+                    <Check className="h-5 w-5 text-purple-600 dark:text-purple-300" />
                     <span>{feat}</span>
                   </motion.li>
                 ))}

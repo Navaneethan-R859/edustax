@@ -26,27 +26,35 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 overflow-hidden px-6">
+    <section
+      className="
+        relative h-screen flex flex-col items-center justify-center text-center 
+        bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 
+        dark:from-gray-900 dark:via-gray-800 dark:to-gray-900
+        overflow-hidden px-6
+      "
+    >
       {/* Background Spinning Shape */}
       <motion.div
-        className="absolute w-96 h-96 bg-purple-400 rounded-full opacity-20"
+        className="absolute w-96 h-96 bg-purple-400 dark:bg-purple-700 rounded-full opacity-20"
         variants={spin}
         animate="animate"
       />
 
       {/* Hero Text Content */}
       <div className="relative z-10 max-w-3xl">
-        <h1 className="text-6xl md:text-8xl font-bold text-gray-900">
-          Learn. Grow. Succeed with <span className="text-purple-600">EduStax</span>
+        <h1 className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white">
+          Learn. Grow. Succeed with{" "}
+          <span className="text-purple-600 dark:text-purple-400">EduStax</span>
         </h1>
-        <p className="mt-6 text-lg md:text-2xl text-gray-700">
+        <p className="mt-6 text-lg md:text-2xl text-gray-700 dark:text-gray-300">
           Dive into top courses, earn certifications, and elevate your skills globally.
         </p>
       </div>
 
-      {/* Interactive Floating Icons (3D-like) */}
+      {/* Floating Icons */}
       <motion.div
-        className="absolute top-24 left-12 text-purple-600 text-6xl opacity-80"
+        className="absolute top-24 left-12 text-purple-600 dark:text-purple-400 text-6xl opacity-80"
         variants={float}
         animate="animate"
         whileHover={{ scale: 1.2, rotateY: 20, transition: { duration: 0.5 } }}
@@ -55,7 +63,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-32 right-16 text-pink-600 text-5xl opacity-80"
+        className="absolute top-32 right-16 text-pink-600 dark:text-pink-400 text-5xl opacity-80"
         variants={float}
         animate="animate"
         whileHover={{ scale: 1.2, rotateX: 20 }}
@@ -64,7 +72,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-28 left-16 text-blue-600 text-6xl opacity-80"
+        className="absolute bottom-28 left-16 text-blue-600 dark:text-blue-400 text-6xl opacity-80"
         variants={float}
         animate="animate"
         whileHover={{ scale: 1.2, rotateY: -20 }}
@@ -73,7 +81,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-24 right-20 text-green-600 text-6xl opacity-80"
+        className="absolute bottom-24 right-20 text-green-600 dark:text-green-400 text-6xl opacity-80"
         variants={float}
         animate="animate"
         whileHover={{ scale: 1.2, rotateX: -20 }}
@@ -82,7 +90,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-1/2 left-1/2 text-yellow-600 text-5xl opacity-80"
+        className="absolute top-1/2 left-1/2 text-yellow-600 dark:text-yellow-400 text-5xl opacity-80"
         variants={spin}
         animate="animate"
       >

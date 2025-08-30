@@ -52,13 +52,13 @@ export default function Testimonials() {
   const themeColor = "#7c3aed"; // Purple theme
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-16 text-purple-700"
+          className="text-4xl md:text-5xl font-bold mb-16 text-purple-700 dark:text-purple-400"
         >
           What Our Users Say
         </motion.h2>
@@ -76,7 +76,11 @@ export default function Testimonials() {
                 boxShadow: `0px 20px 40px ${themeColor}55`,
                 borderColor: themeColor,
               }}
-              className="relative p-8 rounded-3xl flex flex-col items-center text-center cursor-pointer overflow-hidden bg-gradient-to-br from-purple-800 to-purple-900 border-2 border-purple-700"
+              className="relative p-8 rounded-3xl flex flex-col items-center text-center cursor-pointer overflow-hidden 
+                         bg-gradient-to-br from-purple-800 to-purple-900 
+                         dark:from-gray-800 dark:to-gray-900 
+                         border-2 border-purple-700 dark:border-purple-600 
+                         transition-colors duration-500"
             >
               {/* Animated Gradient Border */}
               <motion.div
@@ -101,7 +105,7 @@ export default function Testimonials() {
 
               {/* Quote animation */}
               <motion.p
-                className="italic text-purple-300 mb-4"
+                className="italic text-purple-300 dark:text-purple-200 mb-4"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{
@@ -112,8 +116,8 @@ export default function Testimonials() {
                 “{t.quote}”
               </motion.p>
 
-              <h4 className="font-semibold text-purple-400">{t.name}</h4>
-              <span className="text-purple-300 text-sm">{t.role}</span>
+              <h4 className="font-semibold text-purple-400 dark:text-purple-300">{t.name}</h4>
+              <span className="text-purple-300 dark:text-purple-200 text-sm">{t.role}</span>
             </motion.div>
           ))}
         </div>

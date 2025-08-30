@@ -146,7 +146,7 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-14"
         >
-          <span className="text-gray-800">Why Choose</span>{" "}
+          <span className="text-white-800">Why Choose</span>{" "}
           <span className="text-purple-700">Edustax? </span>
         </motion.h2>
 
