@@ -1,41 +1,92 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  FaGraduationCap,
+  FaBook,
+  FaLaptopCode,
+  FaChalkboardTeacher,
+  FaGlobe,
+} from "react-icons/fa";
 
 export default function Hero() {
-  return (
-    <section className="flex flex-col items-center text-center py-24 px-6">
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-4xl md:text-6xl font-bold mb-6"
-      >
-        Build Your SaaS Faster 🚀
-      </motion.h1>
+  const spin = {
+    animate: {
+      rotate: [0, 360],
+      y: [0, -30, 0],
+      transition: { repeat: Infinity, duration: 10, ease: "linear" },
+    },
+  };
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mb-8"
+  const float = {
+    animate: {
+      y: [0, -20, 0],
+      transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+    },
+  };
+
+  return (
+    <section className="relative h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 overflow-hidden px-6">
+      {/* Background Spinning Shape */}
+      <motion.div
+        className="absolute w-96 h-96 bg-purple-400 rounded-full opacity-20"
+        variants={spin}
+        animate="animate"
+      />
+
+      {/* Hero Text Content */}
+      <div className="relative z-10 max-w-3xl">
+        <h1 className="text-6xl md:text-8xl font-bold text-gray-900">
+          Learn. Grow. Succeed with <span className="text-purple-600">EduStax</span>
+        </h1>
+        <p className="mt-6 text-lg md:text-2xl text-gray-700">
+          Dive into top courses, earn certifications, and elevate your skills globally.
+        </p>
+      </div>
+
+      {/* Interactive Floating Icons (3D-like) */}
+      <motion.div
+        className="absolute top-24 left-12 text-purple-600 text-6xl opacity-80"
+        variants={float}
+        animate="animate"
+        whileHover={{ scale: 1.2, rotateY: 20, transition: { duration: 0.5 } }}
       >
-        A modern Next.js starter template for your SaaS landing page, with
-        animations, dark mode, and responsive design.
-      </motion.p>
+        <FaGraduationCap />
+      </motion.div>
 
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="flex gap-4"
+        className="absolute top-32 right-16 text-pink-600 text-5xl opacity-80"
+        variants={float}
+        animate="animate"
+        whileHover={{ scale: 1.2, rotateX: 20 }}
       >
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-md hover:bg-blue-700 transition">
-          Get Started
-        </button>
-        <button className="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-          Learn More
-        </button>
+        <FaBook />
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-28 left-16 text-blue-600 text-6xl opacity-80"
+        variants={float}
+        animate="animate"
+        whileHover={{ scale: 1.2, rotateY: -20 }}
+      >
+        <FaLaptopCode />
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-24 right-20 text-green-600 text-6xl opacity-80"
+        variants={float}
+        animate="animate"
+        whileHover={{ scale: 1.2, rotateX: -20 }}
+      >
+        <FaChalkboardTeacher />
+      </motion.div>
+
+      <motion.div
+        className="absolute top-1/2 left-1/2 text-yellow-600 text-5xl opacity-80"
+        variants={spin}
+        animate="animate"
+      >
+        <FaGlobe />
       </motion.div>
     </section>
   );
