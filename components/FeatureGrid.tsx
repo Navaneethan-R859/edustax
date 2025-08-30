@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants, TargetAndTransition } from "framer-motion";
 import {
   FaBookOpen,
   FaChalkboardTeacher,
@@ -11,34 +11,33 @@ import {
   FaRocket,
   FaHeadset,
 } from "react-icons/fa";
-import { UserCircle } from "lucide-react";
+
+
+const cardHover: TargetAndTransition = {
+  scale: 1.05,
+  rotateY: 6,
+  rotateX: 6,
+  transition: { type: "spring", stiffness: 200, damping: 12 },
+};
+
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40, rotateX: -5 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+  }),
+};
+
+
+const float: TargetAndTransition = {
+  y: [0, -12, 0],
+  transition: { repeat: Infinity, duration: 3, ease: "easeInOut" },
+};
 
 export default function Features() {
-  const cardHover = {
-    hover: {
-      scale: 1.05,
-      rotateY: 10,
-      rotateX: 10,
-      transition: { type: "spring", stiffness: 200, damping: 12 },
-    },
-  };
-
-  const float = {
-    animate: {
-      y: [0, -15, 0],
-      transition: { repeat: Infinity, duration: 4, ease: "easeInOut" },
-    },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-    }),
-  };
-
   const features = [
     { icon: <FaBookOpen className="text-purple-600 dark:text-purple-400 text-5xl" />, title: "Wide Range of Courses", desc: "Access diverse subjects crafted by industry experts." },
     { icon: <FaChalkboardTeacher className="text-green-600 dark:text-green-400 text-5xl" />, title: "Expert Instructors", desc: "Learn from professionals with real-world experience." },
@@ -50,28 +49,34 @@ export default function Features() {
     { icon: <FaHeadset className="text-teal-600 dark:text-teal-400 text-5xl" />, title: "24/7 Support", desc: "Dedicated mentors and instant query resolution." },
   ];
 
-  const stats = [
-    { title: "Total Users", value: "15,320", change: "+10.5% this month", color: "green" },
-    { title: "Active Users", value: "3,450", change: "-2.1% last week", color: "red" },
-    { title: "Total Courses", value: "187", change: "+5.0% this quarter", color: "green" },
-    { title: "Total Earnings", value: "$125,800", change: "+12.3% this month", color: "green" },
-  ];
-
   return (
-    <section className="relative py-20 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-20 bg-transparent overflow-hidden">
       {/* Section Heading */}
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true }}
         className="text-center mb-16 relative z-10"
       >
         <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
-          Features Of <span className="text-purple-600 dark:text-purple-400">EduStax</span>
+          Features Of{" "}
+          <motion.span
+            animate={{ color: ["#9333EA", "#A855F7", "#9333EA"] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          >
+            EduStax
+          </motion.span>
         </h2>
-        <p className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+        <motion.p
+          className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           Discover the features that make EduStax the best place for learning.
-        </p>
+        </motion.p>
       </motion.div>
 
       {/* Feature Cards */}
@@ -80,18 +85,23 @@ export default function Features() {
           <motion.div
             key={idx}
             className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
-            variants={cardHover}
-            whileHover="hover"
-            whileTap={{ scale: 0.98 }}
-            custom={idx}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={idx}
             variants={fadeUp}
+            whileHover={cardHover} 
+            whileTap={{ scale: 0.98 }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <motion.div variants={float} animate="animate" className="mb-6">
+            {/* Floating Icon */}
+            <motion.div
+              animate={float} 
+              className="mb-6"
+            >
               {feature.icon}
             </motion.div>
+
             <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
               {feature.title}
             </h3>
@@ -100,141 +110,15 @@ export default function Features() {
         ))}
       </div>
 
-      {/* EduStax Dashboard Showcase */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6 relative z-10">
-        {/* Sidebar */}
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 120 }}
-          whileHover={{ scale: 1.02, rotateY: 5 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 col-span-1 flex flex-col space-y-6"
-        >
-          <div className="font-bold text-xl text-gray-800 dark:text-white">📚 EduStax</div>
-          <nav className="flex flex-col space-y-4 text-gray-700 dark:text-gray-300">
-            <a className="font-semibold text-purple-600 dark:text-purple-400">Dashboard</a>
-            <a>Learning</a>
-            <a>My Organization</a>
-            <a>Total Earnings</a>
-            <a>Settings</a>
-            <a>Profile</a>
-          </nav>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="mt-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 rounded-lg"
-          >
-            Logout
-          </motion.button>
-        </motion.div>
-
-        {/* Main Dashboard */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, rotateX: 5 }}
-          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-          transition={{ duration: 1, type: "spring", stiffness: 100 }}
-          whileHover={{ scale: 1.02, rotateY: 5, rotateX: 2 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 col-span-3"
-        >
-          {/* Navbar */}
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 15, delay: 0.2 }}
-            className="flex justify-between items-center mb-6"
-          >
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h2>
-            <div className="flex items-center gap-4">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
-              >
-                PLAN STATUS : PREMIUM
-              </motion.button>
-              <UserCircle className="w-8 h-8 text-gray-600 dark:text-gray-300" />
-            </div>
-          </motion.div>
-
-          {/* Welcome */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, rotateX: 10 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-          >
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-              Welcome back, <span className="text-purple-600 dark:text-purple-400">John!</span>
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Here’s a quick overview of your dashboard.
-            </p>
-          </motion.div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 perspective-1000">
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.2, type: "spring", stiffness: 120, damping: 12 }}
-                whileHover={{ scale: 1.12, rotateX: -8, rotateY: 8, boxShadow: "0px 15px 40px rgba(0,0,0,0.2)" }}
-                className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm cursor-pointer"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <h4 className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</h4>
-                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stat.value}</p>
-                <span className={`text-${stat.color}-600 dark:text-${stat.color}-400 text-sm`}>{stat.change}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Calendar + Webinar */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              whileHover={{ scale: 1.05, rotateZ: -2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
-            >
-              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Upcoming Events</h4>
-              <div className="text-sm text-gray-500 dark:text-gray-400">📅 August 2025 (Calendar UI)</div>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
-              >
-                Schedule
-              </motion.button>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", delay: 0.1 }}
-              whileHover={{ scale: 1.05, rotateZ: 2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
-            >
-              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Data Analytics Webinar</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Tue, 12 Aug 2025 • 12:00–1:00 EST
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                🎤 Hosted by Prof. Ramesh Kumar & Dr. Meena Joseph
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">👥 150+ registered</p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-
       {/* Background Glow */}
       <motion.div
-        className="absolute top-40 left-20 w-80 h-80 bg-purple-400 dark:bg-purple-600 rounded-full opacity-20 blur-3xl"
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0], opacity: [0.2, 0.3, 0.2] }}
+        className="absolute top-40 left-20 w-80 h-80 bg-purple-400 dark:bg-purple-600 rounded-full opacity-15 blur-3xl"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 dark:bg-pink-600 rounded-full opacity-20 blur-3xl"
-        animate={{ scale: [1.2, 1, 1.3], rotate: [0, -45, 0], opacity: [0.2, 0.35, 0.2] }}
+        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 dark:bg-pink-600 rounded-full opacity-15 blur-3xl"
+        animate={{ scale: [1.2, 1, 1.3], opacity: [0.15, 0.25, 0.15] }}
         transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
       />
     </section>

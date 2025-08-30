@@ -49,28 +49,59 @@ const testimonials = [
 
 export default function Testimonials() {
   const slideDirections = ["-100%", "100%", "-50%", "50%"];
-  const themeColor = "#7c3aed"; // Purple theme
+  const themeColor = "#7c3aed";
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <section className="relative py-20 px-6 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+      
+      {/* Background Glow Effects */}
+      <motion.div
+        className="absolute top-1/4 left-1/3 w-[40rem] h-[40rem] bg-purple-400 dark:bg-purple-700 rounded-full blur-3xl opacity-30"
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.1, 1],
+          transition: { repeat: Infinity, duration: 8, ease: "easeInOut" },
+        }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/3 w-[30rem] h-[30rem] bg-pink-300 dark:bg-pink-700 rounded-full blur-3xl opacity-20"
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.1, 1],
+          transition: { repeat: Infinity, duration: 8, ease: "easeInOut" },
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto text-center z-10">
+        {/* Animated Title */}
         <motion.h2
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold mb-16 text-purple-700 dark:text-purple-400"
         >
           What Our Users Say
         </motion.h2>
 
+        {/* Testimonials Grid */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {testimonials.map((t, idx) => (
             <motion.div
               key={idx}
-              initial={{ x: slideDirections[idx % slideDirections.length], opacity: 0, scale: 0.95 }}
+              initial={{
+                x: slideDirections[idx % slideDirections.length],
+                opacity: 0,
+                scale: 0.95,
+              }}
               whileInView={{ x: 0, opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.2, type: "spring", stiffness: 150, damping: 15 }}
+              transition={{
+                delay: idx * 0.15,
+                type: "spring",
+                stiffness: 150,
+                damping: 15,
+              }}
               whileHover={{
                 scale: 1.05,
                 boxShadow: `0px 20px 40px ${themeColor}55`,
@@ -82,16 +113,7 @@ export default function Testimonials() {
                          border-2 border-purple-700 dark:border-purple-600 
                          transition-colors duration-500"
             >
-              {/* Animated Gradient Border */}
-              <motion.div
-                className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent"
-                whileHover={{
-                  borderColor: themeColor,
-                  transition: { duration: 0.8, type: "tween" },
-                }}
-              />
-
-              {/* Avatar animation */}
+              {/* Avatar floating effect */}
               <motion.img
                 src={t.avatar}
                 alt={t.name}
@@ -99,18 +121,17 @@ export default function Testimonials() {
                 animate={{
                   y: [0, -5, 0],
                   scale: [1, 1.05, 1],
+                  transition: { repeat: Infinity, duration: 3, ease: "easeInOut", delay: idx * 0.1 },
                 }}
-                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
               />
 
-              {/* Quote animation */}
               <motion.p
                 className="italic text-purple-300 dark:text-purple-200 mb-4"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{
-                  delay: 0.3,
-                  duration: t.quote.length * 0.05,
+                  delay: 0.3 + idx * 0.1,
+                  duration: t.quote.length * 0.03,
                 }}
               >
                 “{t.quote}”

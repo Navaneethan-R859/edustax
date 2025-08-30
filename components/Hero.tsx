@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   FaGraduationCap,
   FaBook,
@@ -9,27 +9,42 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 
+// Typed motion variants
+const spin: Variants = {
+  animate: {
+    rotate: [0, 360],
+    y: [0, -30, 0],
+    transition: { repeat: Infinity, duration: 10, ease: "linear" },
+  },
+};
+
+const float: Variants = {
+  animate: {
+    y: [0, -20, 0],
+    transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+  },
+};
+
+const textAnimation: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 1, ease: "easeOut" },
+  },
+  pulse: {
+    scale: [1, 1.02, 1],
+    transition: { repeat: Infinity, duration: 3, ease: "easeInOut" },
+  },
+};
+
 export default function Hero() {
-  const spin = {
-    animate: {
-      rotate: [0, 360],
-      y: [0, -30, 0],
-      transition: { repeat: Infinity, duration: 10, ease: "linear" },
-    },
-  };
-
-  const float = {
-    animate: {
-      y: [0, -20, 0],
-      transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
-    },
-  };
-
   return (
     <section
       className="
-        relative h-screen flex flex-col items-center justify-center text-center 
-        bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 
+        relative h-screen flex flex-col items-center justify-center text-center
+        bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300
         dark:from-gray-900 dark:via-gray-800 dark:to-gray-900
         overflow-hidden px-6
       "
@@ -41,15 +56,27 @@ export default function Hero() {
         animate="animate"
       />
 
-      {/* Hero Text Content */}
+      {/* Hero Text */}
       <div className="relative z-10 max-w-3xl">
-        <h1 className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white">
+        <motion.h1
+          className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white"
+          variants={textAnimation}
+          initial="hidden"
+          animate={["visible", "pulse"]}
+        >
           Learn. Grow. Succeed with{" "}
           <span className="text-purple-600 dark:text-purple-400">EduStax</span>
-        </h1>
-        <p className="mt-6 text-lg md:text-2xl text-gray-700 dark:text-gray-300">
+        </motion.h1>
+
+        <motion.p
+          className="mt-6 text-lg md:text-2xl text-gray-700 dark:text-gray-300"
+          variants={textAnimation}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.3, duration: 1 }}
+        >
           Dive into top courses, earn certifications, and elevate your skills globally.
-        </p>
+        </motion.p>
       </div>
 
       {/* Floating Icons */}
