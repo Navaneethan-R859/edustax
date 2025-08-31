@@ -75,7 +75,7 @@ export default function Navbar() {
         />
         {showMenu && (
           <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg p-3 z-50">
-            {["features", "pricing", "testimonials", "faq"].map((section) => (
+            {["Features", "Pricing", "Testimonials", "FAQ"].map((section) => (
               <button
                 key={section}
                 onClick={() => handleNavClick(section)}

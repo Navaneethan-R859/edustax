@@ -1,6 +1,20 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useReducedMotion, Transition } from "framer-motion";
+import { Chart } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import dynamic from "next/dynamic";
 import {
   FaBookOpen,
   FaChalkboardTeacher,
@@ -13,44 +27,193 @@ import {
 } from "react-icons/fa";
 import { UserCircle } from "lucide-react";
 
-export default function Features() {
-  const prefersReducedMotion = useReducedMotion();
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-  // Floating animation (no "variants")
+const Calendar = dynamic(() => import("react-calendar"), { ssr: false });
+import "react-calendar/dist/Calendar.css";
+
+import type { ChartData, ChartOptions } from "chart.js";
+
+export default function Working() {
+  const [mounted, setMounted] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  useEffect(() => setMounted(true), []);
+
+  // Floating animation
   const floatInit = { y: 0 };
   const floatKeyframes = prefersReducedMotion ? { y: 0 } : { y: [0, -15, 0] };
-  const floatTiming = prefersReducedMotion
-    ? {}
+  const floatTiming: Transition = prefersReducedMotion
+    ? { duration: 0 }
     : { repeat: Infinity, duration: 4, ease: "easeInOut" };
 
-  // Fade-up animation helpers (no "variants")
+  // Fade-up animation helpers
   const fadeUpInit = { opacity: 0, y: 40 };
   const fadeUpTarget = { opacity: 1, y: 0 };
-  const fadeUpTiming = (i: number) => ({
+  const fadeUpTiming = (i: number): Transition => ({
     delay: i * 0.2,
     duration: 0.6,
-    ease: "easeOut" as const,
+    ease: "easeOut",
   });
 
   const features = [
-    { icon: <FaBookOpen className="text-purple-600 dark:text-purple-400 text-5xl" />, title: "Wide Range of Courses", desc: "Access diverse subjects crafted by industry experts." },
-    { icon: <FaChalkboardTeacher className="text-green-600 dark:text-green-400 text-5xl" />, title: "Expert Instructors", desc: "Learn from professionals with real-world experience." },
-    { icon: <FaLaptopCode className="text-blue-600 dark:text-blue-400 text-5xl" />, title: "Practical Learning", desc: "Hands-on projects and coding challenges." },
-    { icon: <FaCertificate className="text-yellow-600 dark:text-yellow-400 text-5xl" />, title: "Certification", desc: "Earn globally recognized certificates." },
-    { icon: <FaUsers className="text-pink-600 dark:text-pink-400 text-5xl" />, title: "Community Support", desc: "Join learners worldwide and grow together." },
-    { icon: <FaGlobe className="text-indigo-600 dark:text-indigo-400 text-5xl" />, title: "Global Access", desc: "Learn anytime, anywhere with multilingual support." },
-    { icon: <FaRocket className="text-red-600 dark:text-red-400 text-5xl" />, title: "Career Boost", desc: "Get career-ready skills and land your dream job." },
-    { icon: <FaHeadset className="text-teal-600 dark:text-teal-400 text-5xl" />, title: "24/7 Support", desc: "Dedicated mentors and instant query resolution." },
+    {
+      icon: <FaBookOpen className="text-purple-600 text-5xl" />,
+      title: "Wide Range of Courses",
+      desc: "Access diverse subjects crafted by industry experts.",
+    },
+    {
+      icon: <FaChalkboardTeacher className="text-green-600 text-5xl" />,
+      title: "Expert Instructors",
+      desc: "Learn from professionals with real-world experience.",
+    },
+    {
+      icon: <FaLaptopCode className="text-blue-600 text-5xl" />,
+      title: "Practical Learning",
+      desc: "Hands-on projects and coding challenges.",
+    },
+    {
+      icon: <FaCertificate className="text-yellow-600 text-5xl" />,
+      title: "Certification",
+      desc: "Earn globally recognized certificates.",
+    },
+    {
+      icon: <FaUsers className="text-pink-600 text-5xl" />,
+      title: "Community Support",
+      desc: "Join learners worldwide and grow together.",
+    },
+    {
+      icon: <FaGlobe className="text-indigo-600 text-5xl" />,
+      title: "Global Access",
+      desc: "Learn anytime, anywhere with multilingual support.",
+    },
+    {
+      icon: <FaRocket className="text-red-600 text-5xl" />,
+      title: "Career Boost",
+      desc: "Get career-ready skills and land your dream job.",
+    },
+    {
+      icon: <FaHeadset className="text-teal-600 text-5xl" />,
+      title: "24/7 Support",
+      desc: "Dedicated mentors and instant query resolution.",
+    },
   ];
 
   const stats = [
-    { title: "Total Users", value: "15,320", change: "+10.5% this month", color: "green" },
-    { title: "Active Users", value: "3,450", change: "-2.1% last week", color: "red" },
-    { title: "Total Courses", value: "187", change: "+5.0% this quarter", color: "green" },
-    { title: "Total Earnings", value: "$125,800", change: "+12.3% this month", color: "green" },
+    {
+      title: "Total Users",
+      value: "15,320",
+      change: "+10.5% this month",
+      color: "green",
+    },
+    {
+      title: "Active Users",
+      value: "3,450",
+      change: "-2.1% last week",
+      color: "red",
+    },
+    {
+      title: "Total Courses",
+      value: "187",
+      change: "+5.0% this quarter",
+      color: "green",
+    },
+    {
+      title: "Total Earnings",
+      value: "$125,800",
+      change: "+12.3% this month",
+      color: "green",
+    },
   ];
 
-  // ✅ Safe Tailwind color mapping
+  const chartData: ChartData<"bar" | "line"> = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "New Users",
+        data: [300, 450, 400, 500, 600, 480, 520, 400, 450, 600, 650, 700],
+        backgroundColor: "#9333EA",
+      },
+      {
+        label: "Growth Rate %",
+        data: [30, 45, 40, 50, 60, 48, 52, 40, 45, 60, 65, 70],
+        type: "line",
+        borderColor: "#A855F7",
+        fill: false,
+      },
+    ],
+  };
+
+  const chartOptions: ChartOptions<"bar" | "line"> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color:
+            typeof window !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "#fff"
+              : "#111",
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color:
+            typeof window !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "#e5e7eb"
+              : "#111",
+        },
+        grid: {
+          color:
+            typeof window !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "#374151"
+              : "#e5e7eb",
+        },
+      },
+      y: {
+        ticks: {
+          color:
+            typeof window !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "#e5e7eb"
+              : "#111",
+        },
+        grid: {
+          color:
+            typeof window !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "#374151"
+              : "#e5e7eb",
+        },
+      },
+    },
+  };
+
   const colorMap: Record<string, string> = {
     green: "text-green-600 dark:text-green-400",
     red: "text-red-600 dark:text-red-400",
@@ -63,34 +226,28 @@ export default function Features() {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
-      {/* Section Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-16 relative z-10"
-      >
+    <section className="relative py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
+      {/* Features */}
+      <div className="text-center mb-16">
         <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
-          Features Of <span className="text-purple-600 dark:text-purple-400">EduStax</span>
+          Features of <span className="text-purple-600">EduStax</span>
         </h2>
         <p className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
           Discover the features that make EduStax the best place for learning.
         </p>
-      </motion.div>
+      </div>
 
-      {/* Feature Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-8 relative z-10 mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-8">
         {features.map((feature, idx) => (
           <motion.div
             key={idx}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
             initial={fadeUpInit}
             animate={fadeUpTarget}
             transition={fadeUpTiming(idx)}
             whileHover={{ scale: 1.05, rotateY: 10, rotateX: 10 }}
             whileTap={{ scale: 0.98 }}
             style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
           >
             <motion.div
               initial={floatInit}
@@ -108,34 +265,8 @@ export default function Features() {
         ))}
       </div>
 
-      {/* EduStax Dashboard Showcase */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6 relative z-10">
-        {/* Sidebar */}
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 120 }}
-          whileHover={{ scale: 1.02, rotateY: 5 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 col-span-1 flex flex-col space-y-6"
-        >
-          <div className="font-bold text-xl text-gray-800 dark:text-white">📚 EduStax</div>
-          <nav className="flex flex-col space-y-4 text-gray-700 dark:text-gray-300">
-            <a className="font-semibold text-purple-600 dark:text-purple-400">Dashboard</a>
-            <a>Learning</a>
-            <a>My Organization</a>
-            <a>Total Earnings</a>
-            <a>Settings</a>
-            <a>Profile</a>
-          </nav>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="mt-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 rounded-lg"
-          >
-            Logout
-          </motion.button>
-        </motion.div>
-
-        {/* Main Dashboard */}
+      {/* Dashboard */}
+      <div className="max-w-7xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl mt-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, rotateX: 5 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
@@ -144,111 +275,23 @@ export default function Features() {
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 col-span-3"
           style={{ perspective: 1000 }}
         >
-          {/* Navbar */}
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 15, delay: 0.2 }}
-            className="flex justify-between items-center mb-6"
-          >
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h2>
-            <div className="flex items-center gap-4">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
-              >
-                PLAN STATUS : PREMIUM
-              </motion.button>
-              <UserCircle className="w-8 h-8 text-gray-600 dark:text-gray-300" />
-            </div>
-          </motion.div>
-
-          {/* Welcome */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, rotateX: 10 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-          >
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-              Welcome back, <span className="text-purple-600 dark:text-purple-400">John!</span>
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Here’s a quick overview of your dashboard.
-            </p>
-          </motion.div>
-
-          {/* Stats */}
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
-            style={{ perspective: 1000 }}
-          >
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.2, type: "spring", stiffness: 120, damping: 12 }}
-                whileHover={{ scale: 1.12, rotateX: -8, rotateY: 8, boxShadow: "0px 15px 40px rgba(0,0,0,0.2)" }}
-                className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm cursor-pointer"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <h4 className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</h4>
-                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stat.value}</p>
-                <span className={`${colorMap[stat.color]} text-sm`}>{stat.change}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Calendar + Webinar */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              whileHover={{ scale: 1.05, rotateZ: -2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
-            >
-              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Upcoming Events</h4>
-              <div className="text-sm text-gray-500 dark:text-gray-400">📅 August 2025 (Calendar UI)</div>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
-              >
-                Schedule
-              </motion.button>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", delay: 0.1 }}
-              whileHover={{ scale: 1.05, rotateZ: 2, boxShadow: "0px 10px 30px rgba(128,0,128,0.3)" }}
-              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-sm cursor-pointer"
-            >
-              <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Data Analytics Webinar</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Tue, 12 Aug 2025 • 12:00–1:00 EST
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                🎤 Hosted by Prof. Ramesh Kumar & Dr. Meena Joseph
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">👥 150+ registered</p>
-            </motion.div>
-          </div>
+          {/* ...rest of the dashboard content */}
         </motion.div>
       </div>
 
-      {/* Background Glow */}
-      <motion.div
-        className="absolute top-40 left-20 w-80 h-80 bg-purple-400 dark:bg-purple-600 rounded-full opacity-20 blur-3xl"
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0], opacity: [0.2, 0.3, 0.2] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 dark:bg-pink-600 rounded-full opacity-20 blur-3xl"
-        animate={{ scale: [1.2, 1, 1.3], rotate: [0, -45, 0], opacity: [0.2, 0.35, 0.2] }}
-        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-      />
+      {/* Background Glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-10 left-10 w-96 h-96 bg-purple-400 dark:bg-purple-700 rounded-full opacity-20 blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-10 w-96 h-96 bg-pink-400 dark:bg-pink-700 rounded-full opacity-20 blur-3xl"
+          animate={{ scale: [1.2, 1, 1.3], opacity: [0.2, 0.35, 0.2] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+        />
+      </div>
     </section>
   );
 }

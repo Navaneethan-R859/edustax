@@ -84,72 +84,36 @@ const features = [
 ];
 
 export default function Features() {
-  const float = {
-    animate: {
-      y: [0, -20, 0], // only floating up/down
-      transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
-    },
-  };
-
   return (
     <section className="py-16 px-6 bg-gradient-to-br from-purple-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
-      {/* Floating Icons (no rotate) */}
-      <motion.div
-        className="absolute top-16 left-16 text-purple-300 text-6xl opacity-70"
-        variants={float}
-        animate="animate"
-        whileHover={{ scale: 1.2 }}
-      >
-        <FaBookOpen />
-      </motion.div>
-
-      <motion.div
-        className="absolute top-32 right-16 text-indigo-300 text-5xl opacity-70"
-        variants={float}
-        animate="animate"
-        whileHover={{ scale: 1.2 }}
-      >
-        <FaLaptopCode />
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-28 left-12 text-pink-300 text-6xl opacity-70"
-        variants={float}
-        animate="animate"
-        whileHover={{ scale: 1.2 }}
-      >
-        <FaChalkboardTeacher />
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-24 right-20 text-green-300 text-6xl opacity-70"
-        variants={float}
-        animate="animate"
-        whileHover={{ scale: 1.2 }}
-      >
-        <FaGlobe />
-      </motion.div>
-
-      <motion.div
-        className="absolute top-1/2 left-1/2 text-yellow-300 text-5xl opacity-70"
-        variants={float}
-        animate="animate"
-        whileHover={{ scale: 1.2 }}
-      >
-        <FaRocket />
-      </motion.div>
-
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Animated Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold text-center mb-14"
         >
-          <span className="text-white-800">Why Choose</span>{" "}
-          <span className="text-purple-700">Edustax? </span>
+          <motion.span
+            initial={{ opacity: 0, x: -15 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-gray-800 dark:text-gray-200"
+          >
+            Why Choose{" "}
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, x: 15 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-purple-700 dark:text-purple-400"
+          >
+            Edustax?
+          </motion.span>
         </motion.h2>
 
+        {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((item, i) => {
             const Icon = item.icon;
@@ -160,13 +124,13 @@ export default function Features() {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={item.animation.whileHover}
                 transition={{
-                  type: "tween",
-                  ease: "easeInOut",
-                  duration: 0.4,
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 14,
                   delay: i * 0.1,
                 }}
                 viewport={{ once: true }}
-                className="relative group p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg flex flex-col items-center text-center"
+                className="relative group p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-all duration-300"
               >
                 <motion.div
                   className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-purple-500"
@@ -174,9 +138,9 @@ export default function Features() {
                   whileHover={{
                     opacity: 1,
                     boxShadow:
-                      "0px 0px 20px rgba(124,58,237,0.6), 0px 0px 40px rgba(124,58,237,0.4)",
+                      "0px 0px 20px rgba(124,58,237,0.5), 0px 0px 40px rgba(124,58,237,0.3)",
                   }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.3 }}
                 />
 
                 <div className="relative z-10">

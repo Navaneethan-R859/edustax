@@ -12,36 +12,47 @@ import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+    <div className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Navbar */}
       <Navbar />
 
-      {/* Everything inside a single container with no background separations */}
-      <div className="flex flex-col">
+      <main>
         {/* Hero Section */}
         <Hero />
 
         {/* Features Section */}
-        <FeatureGrid />
+        <section id="Features">
+          <FeatureGrid />
+        </section>
 
         {/* How it Works Section */}
-        <Working />
+        <section id="Working">
+          <Working />
+        </section>
 
         {/* Why Choose Us Section */}
-        <WhyChooseUs />
+        <section id="WhyChooseUs">
+          <WhyChooseUs />
+        </section>
 
         {/* Pricing Section */}
-        <Pricing />
+        <section id="Pricing">
+          <Pricing />
+        </section>
 
         {/* Testimonials Section */}
-        <Testimonials />
+        <section id="Testimonials">
+          <Testimonials />
+        </section>
 
         {/* FAQ Section */}
-        <FAQ />
+        <section id="FAQ">
+          <FAQ />
+        </section>
 
         {/* Footer */}
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }
