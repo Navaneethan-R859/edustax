@@ -2,19 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion, Transition } from "framer-motion";
-import { Chart } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import dynamic from "next/dynamic";
 import {
   FaBookOpen,
   FaChalkboardTeacher,
@@ -25,23 +12,6 @@ import {
   FaRocket,
   FaHeadset,
 } from "react-icons/fa";
-import { UserCircle } from "lucide-react";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const Calendar = dynamic(() => import("react-calendar"), { ssr: false });
-import "react-calendar/dist/Calendar.css";
-
-import type { ChartData, ChartOptions } from "chart.js";
 
 export default function Working() {
   const [mounted, setMounted] = useState(false);
@@ -107,124 +77,6 @@ export default function Working() {
     },
   ];
 
-  const stats = [
-    {
-      title: "Total Users",
-      value: "15,320",
-      change: "+10.5% this month",
-      color: "green",
-    },
-    {
-      title: "Active Users",
-      value: "3,450",
-      change: "-2.1% last week",
-      color: "red",
-    },
-    {
-      title: "Total Courses",
-      value: "187",
-      change: "+5.0% this quarter",
-      color: "green",
-    },
-    {
-      title: "Total Earnings",
-      value: "$125,800",
-      change: "+12.3% this month",
-      color: "green",
-    },
-  ];
-
-  const chartData: ChartData<"bar" | "line"> = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "New Users",
-        data: [300, 450, 400, 500, 600, 480, 520, 400, 450, 600, 650, 700],
-        backgroundColor: "#9333EA",
-      },
-      {
-        label: "Growth Rate %",
-        data: [30, 45, 40, 50, 60, 48, 52, 40, 45, 60, 65, 70],
-        type: "line",
-        borderColor: "#A855F7",
-        fill: false,
-      },
-    ],
-  };
-
-  const chartOptions: ChartOptions<"bar" | "line"> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        labels: {
-          color:
-            typeof window !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "#fff"
-              : "#111",
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color:
-            typeof window !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "#e5e7eb"
-              : "#111",
-        },
-        grid: {
-          color:
-            typeof window !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "#374151"
-              : "#e5e7eb",
-        },
-      },
-      y: {
-        ticks: {
-          color:
-            typeof window !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "#e5e7eb"
-              : "#111",
-        },
-        grid: {
-          color:
-            typeof window !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "#374151"
-              : "#e5e7eb",
-        },
-      },
-    },
-  };
-
-  const colorMap: Record<string, string> = {
-    green: "text-green-600 dark:text-green-400",
-    red: "text-red-600 dark:text-red-400",
-    yellow: "text-yellow-600 dark:text-yellow-400",
-    blue: "text-blue-600 dark:text-blue-400",
-    pink: "text-pink-600 dark:text-pink-400",
-    indigo: "text-indigo-600 dark:text-indigo-400",
-    teal: "text-teal-600 dark:text-teal-400",
-    purple: "text-purple-600 dark:text-purple-400",
-  };
-
   return (
     <section className="relative py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Features */}
@@ -237,6 +89,7 @@ export default function Working() {
         </p>
       </div>
 
+      {/* Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-8">
         {features.map((feature, idx) => (
           <motion.div
@@ -265,7 +118,7 @@ export default function Working() {
         ))}
       </div>
 
-      {/* Dashboard */}
+      {/* Dashboard container (empty placeholder now, you can add anything else later) */}
       <div className="max-w-7xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl mt-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, rotateX: 5 }}
@@ -275,7 +128,9 @@ export default function Working() {
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 col-span-3"
           style={{ perspective: 1000 }}
         >
-          {/* ...rest of the dashboard content */}
+          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+            Dashboard Coming Soon...
+          </h3>
         </motion.div>
       </div>
 
