@@ -19,7 +19,7 @@ const features = [
     title: "Interactive Learning",
     desc: "Learn with 3D simulations, quizzes, and gamified content.",
     icon: FaBookOpen,
-    animation: { whileHover: { rotateX: 8, rotateY: -8, scale: 1.07 } },
+    animation: { whileHover: { scale: 1.07 } },
   },
   {
     title: "Expert Mentors",
@@ -31,7 +31,7 @@ const features = [
     title: "Code Playground",
     desc: "Experiment, build, and run projects with instant feedback.",
     icon: FaLaptopCode,
-    animation: { whileHover: { rotate: 6, scale: 1.06 } },
+    animation: { whileHover: { scale: 1.06 } },
   },
   {
     title: "Certified Courses",
@@ -40,7 +40,8 @@ const features = [
     animation: {
       whileHover: {
         scale: 1.1,
-        boxShadow: "0px 15px 40px rgba(124,58,237,0.3), 0px 10px 20px rgba(0,0,0,0.15)",
+        boxShadow:
+          "0px 15px 40px rgba(124,58,237,0.3), 0px 10px 20px rgba(0,0,0,0.15)",
       },
     },
   },
@@ -48,25 +49,25 @@ const features = [
     title: "Community Connect",
     desc: "Collaborate with peers, join discussions, and grow together.",
     icon: FaUsers,
-    animation: { whileHover: { rotateY: 12, scale: 1.08 } },
+    animation: { whileHover: { scale: 1.08 } },
   },
   {
     title: "Global Access",
     desc: "Seamless learning anywhere, anytime across devices.",
     icon: FaGlobe,
-    animation: { whileHover: { y: -8, rotateX: -6, scale: 1.06 } },
+    animation: { whileHover: { y: -8, scale: 1.06 } },
   },
   {
     title: "Career Growth",
     desc: "Placement prep, internships, and career support programs.",
     icon: FaChartLine,
-    animation: { whileHover: { rotate: -6, scale: 1.05 } },
+    animation: { whileHover: { scale: 1.05 } },
   },
   {
     title: "Innovation Hub",
     desc: "Build projects, hackathons, and showcase creativity.",
     icon: FaLightbulb,
-    animation: { whileHover: { rotateX: 10, scale: 1.07 } },
+    animation: { whileHover: { scale: 1.07 } },
   },
   {
     title: "24/7 Support",
@@ -78,27 +79,26 @@ const features = [
     title: "Fast Growth",
     desc: "Rocket-speed progress with AI-personalized learning paths.",
     icon: FaRocket,
-    animation: { whileHover: { rotateY: -10, scale: 1.09 } },
+    animation: { whileHover: { scale: 1.09 } },
   },
 ];
 
 export default function Features() {
   const float = {
     animate: {
-      y: [0, -20, 0],
-      rotate: [0, 360, 0],
-      transition: { repeat: Infinity, duration: 10, ease: "easeInOut" },
+      y: [0, -20, 0], // only floating up/down
+      transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
     },
   };
 
   return (
     <section className="py-16 px-6 bg-gradient-to-br from-purple-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
-      {/* Floating 3D Icons */}
+      {/* Floating Icons (no rotate) */}
       <motion.div
         className="absolute top-16 left-16 text-purple-300 text-6xl opacity-70"
         variants={float}
         animate="animate"
-        whileHover={{ scale: 1.3, rotateY: 20 }}
+        whileHover={{ scale: 1.2 }}
       >
         <FaBookOpen />
       </motion.div>
@@ -107,7 +107,7 @@ export default function Features() {
         className="absolute top-32 right-16 text-indigo-300 text-5xl opacity-70"
         variants={float}
         animate="animate"
-        whileHover={{ scale: 1.2, rotateX: 20 }}
+        whileHover={{ scale: 1.2 }}
       >
         <FaLaptopCode />
       </motion.div>
@@ -116,7 +116,7 @@ export default function Features() {
         className="absolute bottom-28 left-12 text-pink-300 text-6xl opacity-70"
         variants={float}
         animate="animate"
-        whileHover={{ scale: 1.3, rotateY: -20 }}
+        whileHover={{ scale: 1.2 }}
       >
         <FaChalkboardTeacher />
       </motion.div>
@@ -125,7 +125,7 @@ export default function Features() {
         className="absolute bottom-24 right-20 text-green-300 text-6xl opacity-70"
         variants={float}
         animate="animate"
-        whileHover={{ scale: 1.2, rotateX: -20 }}
+        whileHover={{ scale: 1.2 }}
       >
         <FaGlobe />
       </motion.div>
@@ -134,12 +134,12 @@ export default function Features() {
         className="absolute top-1/2 left-1/2 text-yellow-300 text-5xl opacity-70"
         variants={float}
         animate="animate"
+        whileHover={{ scale: 1.2 }}
       >
         <FaRocket />
       </motion.div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Updated Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -156,8 +156,8 @@ export default function Features() {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, rotateY: 90 }}
-                whileInView={{ opacity: 1, rotateY: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 whileHover={item.animation.whileHover}
                 transition={{
                   type: "tween",
@@ -168,7 +168,6 @@ export default function Features() {
                 viewport={{ once: true }}
                 className="relative group p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg flex flex-col items-center text-center"
               >
-                {/* Animated border wrapper */}
                 <motion.div
                   className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-purple-500"
                   initial={{ opacity: 0 }}
@@ -180,17 +179,18 @@ export default function Features() {
                   transition={{ duration: 0.4 }}
                 />
 
-                {/* Card content */}
                 <div className="relative z-10">
                   <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="p-4 bg-purple-100 dark:bg-purple-900 rounded-full mb-4"
                   >
                     <Icon className="w-8 h-8 text-purple-600 dark:text-purple-300" />
                   </motion.div>
                   <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {item.desc}
+                  </p>
                 </div>
               </motion.div>
             );

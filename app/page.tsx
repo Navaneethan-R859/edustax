@@ -12,46 +12,36 @@ import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+      {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
-      <section id="hero" className="scroll-mt-24">
+      {/* Everything inside a single container with no background separations */}
+      <div className="flex flex-col">
+        {/* Hero Section */}
         <Hero />
-      </section>
 
-      {/* Features Section */}
-      <section id="features" className="scroll-mt-24">
+        {/* Features Section */}
         <FeatureGrid />
-      </section>
 
-      {/* How it Works Section */}
-      <section id="working" className="scroll-mt-24">
+        {/* How it Works Section */}
         <Working />
-      </section>
 
-      {/* Why Choose Us Section */}
-      <section id="why-choose-us" className="scroll-mt-24">
+        {/* Why Choose Us Section */}
         <WhyChooseUs />
-      </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="scroll-mt-24">
+        {/* Pricing Section */}
         <Pricing />
-      </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="scroll-mt-24">
+        {/* Testimonials Section */}
         <Testimonials />
-      </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="scroll-mt-24">
+        {/* FAQ Section */}
         <FAQ />
-      </section>
 
-      {/* Footer */}
-      <Footer />
-    </>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </div>
   );
 }

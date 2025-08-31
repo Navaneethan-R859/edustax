@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   FaBookOpen,
   FaChalkboardTeacher,
@@ -14,30 +14,23 @@ import {
 import { UserCircle } from "lucide-react";
 
 export default function Features() {
-  const cardHover = {
-    hover: {
-      scale: 1.05,
-      rotateY: 10,
-      rotateX: 10,
-      transition: { type: "spring", stiffness: 200, damping: 12 },
-    },
-  };
+  const prefersReducedMotion = useReducedMotion();
 
-  const float = {
-    animate: {
-      y: [0, -15, 0],
-      transition: { repeat: Infinity, duration: 4, ease: "easeInOut" },
-    },
-  };
+  // Floating animation (no "variants")
+  const floatInit = { y: 0 };
+  const floatKeyframes = prefersReducedMotion ? { y: 0 } : { y: [0, -15, 0] };
+  const floatTiming = prefersReducedMotion
+    ? {}
+    : { repeat: Infinity, duration: 4, ease: "easeInOut" };
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-    }),
-  };
+  // Fade-up animation helpers (no "variants")
+  const fadeUpInit = { opacity: 0, y: 40 };
+  const fadeUpTarget = { opacity: 1, y: 0 };
+  const fadeUpTiming = (i: number) => ({
+    delay: i * 0.2,
+    duration: 0.6,
+    ease: "easeOut" as const,
+  });
 
   const features = [
     { icon: <FaBookOpen className="text-purple-600 dark:text-purple-400 text-5xl" />, title: "Wide Range of Courses", desc: "Access diverse subjects crafted by industry experts." },
@@ -56,6 +49,18 @@ export default function Features() {
     { title: "Total Courses", value: "187", change: "+5.0% this quarter", color: "green" },
     { title: "Total Earnings", value: "$125,800", change: "+12.3% this month", color: "green" },
   ];
+
+  // ✅ Safe Tailwind color mapping
+  const colorMap: Record<string, string> = {
+    green: "text-green-600 dark:text-green-400",
+    red: "text-red-600 dark:text-red-400",
+    yellow: "text-yellow-600 dark:text-yellow-400",
+    blue: "text-blue-600 dark:text-blue-400",
+    pink: "text-pink-600 dark:text-pink-400",
+    indigo: "text-indigo-600 dark:text-indigo-400",
+    teal: "text-teal-600 dark:text-teal-400",
+    purple: "text-purple-600 dark:text-purple-400",
+  };
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-purple-200 via-purple-100 to-purple-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
@@ -80,16 +85,19 @@ export default function Features() {
           <motion.div
             key={idx}
             className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center cursor-pointer"
-            variants={cardHover}
-            whileHover="hover"
+            initial={fadeUpInit}
+            animate={fadeUpTarget}
+            transition={fadeUpTiming(idx)}
+            whileHover={{ scale: 1.05, rotateY: 10, rotateX: 10 }}
             whileTap={{ scale: 0.98 }}
-            custom={idx}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            style={{ transformStyle: "preserve-3d" }}
+            style={{ transformStyle: "preserve-3d", perspective: 1000 }}
           >
-            <motion.div variants={float} animate="animate" className="mb-6">
+            <motion.div
+              initial={floatInit}
+              animate={floatKeyframes}
+              transition={floatTiming}
+              className="mb-6"
+            >
               {feature.icon}
             </motion.div>
             <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
@@ -134,6 +142,7 @@ export default function Features() {
           transition={{ duration: 1, type: "spring", stiffness: 100 }}
           whileHover={{ scale: 1.02, rotateY: 5, rotateX: 2 }}
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 col-span-3"
+          style={{ perspective: 1000 }}
         >
           {/* Navbar */}
           <motion.div
@@ -169,7 +178,10 @@ export default function Features() {
           </motion.div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 perspective-1000">
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
+            style={{ perspective: 1000 }}
+          >
             {stats.map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -182,7 +194,7 @@ export default function Features() {
               >
                 <h4 className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</h4>
                 <p className="text-2xl font-bold text-gray-800 dark:text-white">{stat.value}</p>
-                <span className={`text-${stat.color}-600 dark:text-${stat.color}-400 text-sm`}>{stat.change}</span>
+                <span className={`${colorMap[stat.color]} text-sm`}>{stat.change}</span>
               </motion.div>
             ))}
           </div>

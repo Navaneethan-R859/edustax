@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   { question: "What is Edustax?", answer: "Edustax is a SaaS platform designed to simplify learning management and digital education delivery." },
-  { question: "Is there a free trial?", answer: "Yes! You can start with a 14-day free trial and explore all features before upgrading." },
+  { question: "Is there a free trial?", answer: "Yes! You can start with a 14-day free trial and explore all features before upgrading." }, 
   { question: "Can I cancel anytime?", answer: "Absolutely. You can cancel or switch plans at any time with no hidden charges." },
   { question: "Is Edustax suitable for schools and colleges?", answer: "Yes! Our platform is designed to scale from individual learners to large educational institutions." },
   { question: "Does it support collaborative learning?", answer: "Yes! Teachers and students can interact, share content, and track progress in real-time." },
@@ -63,7 +63,7 @@ export default function FAQ() {
           {faqs.map((faq, idx) => (
             <motion.div
               key={idx}
-              className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden cursor-pointer border-2 border-purple-200 dark:border-purple-700"
+              className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden cursor-pointer border-2 border-purple-200 dark:border-purple-600"
               variants={fadeUp}
               custom={idx}
               initial="hidden"
