@@ -18,7 +18,6 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
-
 const Calendar = dynamic(() => import("react-calendar"), { ssr: false });
 import "react-calendar/dist/Calendar.css";
 
@@ -95,7 +94,7 @@ export default function Dashboard() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          {[
+          {[ 
             { title: "Total Users", value: "15,320", change: "+10.5% this month", color: "text-green-500" },
             { title: "Active Users", value: "3,450", change: "-2.1% last week", color: "text-red-500" },
             { title: "Total Courses", value: "187", change: "+5.0% this quarter", color: "text-green-500" },
@@ -115,7 +114,7 @@ export default function Dashboard() {
           <Chart type="bar" data={chartData} />
         </div>
 
-        {/* Calendar */}
+        {/* Calendar & Next Event */}
         {mounted && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl shadow-md">
@@ -136,16 +135,18 @@ export default function Dashboard() {
       </div>
 
       {/* Background Glows */}
-      <motion.div
-        className="absolute w-96 h-96 bg-purple-400 dark:bg-purple-700 rounded-full opacity-20"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-pink-400 rounded-full opacity-20 blur-3xl"
-        animate={{ scale: [1.2, 1, 1.3], opacity: [0.2, 0.35, 0.2] }}
-        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-      />
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-10 left-10 w-96 h-96 bg-purple-400 dark:bg-purple-700 rounded-full opacity-20 blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-10 w-96 h-96 bg-pink-400 dark:bg-pink-700 rounded-full opacity-20 blur-3xl"
+          animate={{ scale: [1.2, 1, 1.3], opacity: [0.2, 0.35, 0.2] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+        />
+      </div>
     </section>
   );
 }
